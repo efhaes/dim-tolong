@@ -120,9 +120,8 @@ def cart_detail(request):
 
 # Checkout
 @login_required
-def checkout(request):
+def checkout(request, product_id):
     if request.method == 'POST':
-        product_id = request.POST.get('product_id')
         if product_id:
             product = get_object_or_404(Product, id=product_id)
 

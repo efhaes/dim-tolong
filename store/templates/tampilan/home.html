@@ -52,7 +52,7 @@
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-outline-primary btn-sm">Tambah ke Keranjang</button>
                             </form>
-                            <form method="post" action="{% url 'payment_page' product.id %}" class="d-inline">
+                            <form method="post" action="{% url 'checkout' product.id %}" class="d-inline">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-primary btn-sm">Beli Sekarang</button>
                             </form>
