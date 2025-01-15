@@ -1,0 +1,11 @@
+<h2>Daftar Produk</h2>
+<ul>
+    {% for product in products %}
+        <li>
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <p>Harga: {{ product.price }}</p>
+            <a href="{% url 'add_to_cart' product.id %}">Tambah ke Keranjang</a>
+        </li>
+    {% endfor %}
+</ul>

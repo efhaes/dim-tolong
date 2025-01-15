@@ -1,0 +1,62 @@
+<h1>Halaman Pembayaran</h1>
+<p>Total yang harus dibayar: Rp {{ transaction.total_amount }}</p>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div class="form-group">
+        <label for="payment_method">Pilih Metode Pembayaran:</label>
+        <select name="payment_method" id="payment_method" class="form-control" onchange="togglePaymentOptions()">
+            <option value="">-- Pilih Metode Pembayaran --</option>
+            <option value="bank">Bank Transfer</option>
+            <option value="digital_wallet">Dompet Digital</option>
+        </select>
+    </div>
+
+    <!-- Bank Options -->
+    <div id="bank-options" class="payment-option" style="display: none;">
+        <label for="bank_choice">Pilih Bank:</label>
+        <select name="bank_choice" id="bank_choice" class="form-control">
+            <option value="bca">ATM BCA</option>
+            <option value="bri">ATM BRI</option>
+            <option value="mandiri">ATM Mandiri</option>
+            <option value="bni">ATM BNI</option>
+        </select>
+    </div>
+
+    <!-- E-wallet Options -->
+    <div id="ewallet-options" class="payment-option" style="display: none;">
+        <label for="ewallet_choice">Pilih Dompet Digital:</label>
+        <select name="ewallet_choice" id="ewallet_choice" class="form-control">
+            <option value="dana">Dana</option>
+            <option value="gopay">Gopay</option>
+            <option value="ovo">OVO</option>
+            <option value="linkaja">LinkAja</option>
+        </select>
+    </div>
+
+    <!-- Upload Bukti Pembayaran -->
+    <div class="upload-proof">
+        <label for="payment_proof">Unggah Bukti Pembayaran:</label>
+        <input type="file" id="payment_proof" name="payment_proof" accept="image/*" required>
+        <p class="text-muted">* Foto bukti transaksi yang jelas dan terlihat nomor rekening.</p>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Bayar Sekarang</button>
+</form>
+
+<script>
+    function togglePaymentOptions() {
+        var paymentMethod = document.getElementById('payment_method').value;
+        if (paymentMethod === 'bank') {
+            document.getElementById('bank-options').style.display = 'block';
+            document.getElementById('ewallet-options').style.display = 'none';
+        } else if (paymentMethod === 'digital_wallet') {
+            document.getElementById('bank-options').style.display = 'none';
+            document.getElementById('ewallet-options').style.display = 'block';
+        } else {
+            document.getElementById('bank-options').style.display = 'none';
+            document.getElementById('ewallet-options').style.display = 'none';
+        }
+    }
+</script>
